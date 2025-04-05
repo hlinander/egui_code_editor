@@ -297,7 +297,8 @@ impl CodeEditor {
                     .id_salt(format!("{}_inner_scroll", self.id))
                     .show(h, |ui| {
                         let mut layouter = |ui: &egui::Ui, string: &str, _wrap_width: f32| {
-                            let layout_job = highlight(ui.ctx(), self, string);
+                            let mut layout_job = highlight(ui.ctx(), self, string);
+                            layout_job.wrap.max_width = _wrap_width;
                             ui.fonts(|f| f.layout_job(layout_job))
                         };
                         let output = egui::TextEdit::multiline(text)
